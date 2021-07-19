@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const PageContainer = styled.main`
   h1 {
@@ -7,13 +7,28 @@ export const PageContainer = styled.main`
 `;
 
 export const CountriesContainer = styled.section`
-  border: 1px solid;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 
   div {
     text-align: center;
-    border: 1px solid;
     width: 250px;
+    background: var(--color-grey-100);
+    transition: 0.3s;
+
+    p {
+      /* margin: 0; */
+    }
+
+    div {
+      width: 50px;
+      height: auto;
+      border: none;
+    }
+
+    &:hover {
+      opacity: 0.7;
+      cursor: pointer;
+    }
   }
 `;
