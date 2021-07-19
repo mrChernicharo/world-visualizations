@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useEffect } from "react";
 import { Country } from "../interfaces/Country";
+import { PageContainer, CountriesContainer } from "../styles/Index";
 
 interface IProps {
   countries: Country[];
@@ -22,15 +23,17 @@ export async function getStaticProps() {
 export default function HomePage({ countries }: IProps) {
   useEffect(() => console.log(countries));
   return (
-    <div>
+    <PageContainer>
       <h1>Hello Charts</h1>
 
-      {countries.map((country) => (
-        <div key={country.numericCode}>
-          <h3>{country.name}</h3>
-          <p>Population: {country.population}</p>
-        </div>
-      ))}
-    </div>
+      <CountriesContainer>
+        {countries.map((country) => (
+          <div key={country.numericCode}>
+            <h3>{country.name}</h3>
+            <p>Population: {country.population.toLocaleString("us")}</p>
+          </div>
+        ))}
+      </CountriesContainer>
+    </PageContainer>
   );
 }
