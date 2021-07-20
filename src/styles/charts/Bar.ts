@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
-export const ChartContainer = styled.svg`
+export const ChartContainer = styled.div`
   border: 1px solid var(--color-primary-600);
 `;
