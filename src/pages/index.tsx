@@ -4,6 +4,7 @@ import { Country } from '../interfaces/Country';
 import { Nav } from '../components/template/Nav';
 import HomePage from './home/HomePage';
 import { PageContainer, CountriesContainer } from '../styles/Index';
+import { useStore } from '../hooks/useStore';
 
 interface IProps {
   countries: Country[];
@@ -24,6 +25,11 @@ export async function getStaticProps() {
 }
 
 export default function Index({ countries, isAppleM1 }: IProps) {
+  const { setCountries } = useStore();
+
+  useEffect(() => {
+    setCountries(countries);
+  }, [setCountries, countries]);
   return (
     <PageContainer>
       <Nav />
