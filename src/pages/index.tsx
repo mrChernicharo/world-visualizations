@@ -3,47 +3,48 @@ import { Country } from '../interfaces/Country';
 
 import { Nav } from '../components/template/Nav';
 import HomePage from './home/HomePage';
-import { PageContainer, CountriesContainer } from '../styles/Index';
+import { PageContainer } from '../styles/Index';
 import { useStore } from '../hooks/useStore';
 
 interface IProps {
-  countries: Country[];
-  fuelData: any;
-  isAppleM1: boolean;
+	countries: Country[];
+	fuelData: any;
+	isAppleM1: boolean;
 }
 
 export default function Index({ countries, fuelData, isAppleM1 }: IProps) {
-  const { setCountries } = useStore();
+	const { setCountries } = useStore();
 
-  useEffect(() => {
-    setCountries(countries);
-  }, [setCountries, countries]);
+	useEffect(() => {
+		setCountries(countries);
+	}, [setCountries, countries]);
 
-  useEffect(() => console.log(fuelData), [fuelData]);
-  return (
-    <PageContainer>
-      <Nav />
+	useEffect(() => console.log(fuelData), [fuelData]);
+	return (
+		<PageContainer>
+			<Nav />
 
-      <HomePage countries={countries} isAppleM1 />
-    </PageContainer>
-  );
+			<HomePage countries={countries} isAppleM1 />
+		</PageContainer>
+	);
 }
 
 export async function getStaticProps() {
-  const req = await fetch('https://restcountries.eu/rest/v2/all');
+	const req = await fetch('https://restcountries.eu/rest/v2/all');
 
-  const fuelReq = await fetch(
-    `https://developer.nrel.gov/api/alt-fuel-stations/v1.json?limit=10&api_key=${process.env.DATA_GOV_API_KEY}`
-  );
+	const fuelReq = await fetch(
+		`https://developer.nrel.gov/api/alt-fuel-stations/v1.json?limit=10&api_key=${process.env.DATA_GOV_API_KEY}`
+	);
 
-  const countries = await req.json();
-  const fuelData = await fuelReq.json();
+	const countries = await req.json();
+	const fuelData = await fuelReq.json();
 
-  return {
-    props: {
-      countries,
-      fuelData,
-      isAppleM1: process.arch === 'arm64' && process.platform === 'darwin', // bug fix pro M1
-    },
-  };
+	return {
+		props: {
+			countries,
+			fuelData,
+			isAppleM1:
+				process.arch === 'arm64' && process.platform === 'darwin', // bug fix pro M1
+		},
+	};
 }

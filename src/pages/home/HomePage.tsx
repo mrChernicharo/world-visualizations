@@ -6,6 +6,7 @@ import {
 	HomePageContainer,
 	CountriesContainer,
 } from '../../styles/pages/HomePage';
+import CountryCard from '../../components/ui/CountryCard';
 
 interface IHomePageProps {
 	countries: Country[];
@@ -13,7 +14,7 @@ interface IHomePageProps {
 }
 
 export default function HomePage({ countries, isAppleM1 }: IHomePageProps) {
-	React.useEffect(() => console.log(countries));
+	// React.useEffect(() => console.log(countries));
 
 	return (
 		<HomePageContainer>
@@ -27,23 +28,11 @@ export default function HomePage({ countries, isAppleM1 }: IHomePageProps) {
 
 			<CountriesContainer>
 				{countries.map(country => (
-					<div key={country.numericCode}>
-						<h3>{country.name}</h3>
-						<Image
-							src={country.flag}
-							width={'100%'}
-							height={64}
-							alt={`Flag of ${country.name}`}
-							unoptimized={
-								process.env.NODE_ENV === 'development' &&
-								isAppleM1
-							}
-						/>
-						<p>
-							Population:
-							{' ' + country.population.toLocaleString('us')}
-						</p>
-					</div>
+					<CountryCard
+						key={country.alpha3Code}
+						country={country}
+						isAppleM1={isAppleM1}
+					/>
 				))}
 			</CountriesContainer>
 		</HomePageContainer>
