@@ -51,15 +51,10 @@ export const Bar: React.FC<IBarProps> = ({
 				const yScale = d3
 					.scaleLinear()
 					.domain([max, 0])
-					// .domain([0, max])
-					.range([
-						height - (margins.top + margins.bottom),
-						margins.bottom,
-					]);
+					.range([margins.top, height - margins.bottom]);
 
 				const xAxis = d3.axisBottom(xScale);
-				const yAxis = d3.axisLeft(yScale);
-				// .tickSizeOuter(0);
+				const yAxis = d3.axisLeft(yScale).tickSizeOuter(0);
 
 				gY.call(yAxis).attr(
 					'transform',
@@ -73,28 +68,28 @@ export const Bar: React.FC<IBarProps> = ({
 
 				const bars = gBars.selectAll('rect').data(data);
 
+				const barHeight = (d: Country) =>
+					height - margins.top - yScale(d.population);
+
+				const barPosY = (d: Country) =>
+					height - margins.top - barHeight(d);
+
 				bars.enter()
 					.append('rect')
 					.attr('id', d => d.alpha3Code)
 					.attr('class', 'bar')
 					.attr('x', (_, i) => xScale(i))
-					.attr('y', 0)
-
-					// .attr(
-					// 	'y',
-					// 	d => height - yScale(d.population) - margins.bottom
-					// )
+					.attr('y', d => barPosY(d))
 					.attr('width', 20)
-					.attr('height', d => yScale(d.population))
+					.attr('height', d => barHeight(d))
 					.attr('fill', '#6670cc')
 
 					.each((d, i) => {
 						svg.append('svg:image') // img or svg doesn't work
 							.attr('xlink:href', d.flag) // src doesn't work
 							.style('width', 40)
-							.attr('y', 0)
-							// .attr('y', height - yScale(d.population) - 54)
-							.attr('x', xScale(i) + 12);
+							.attr('y', barPosY(d) - 12)
+							.attr('x', xScale(i) + 6);
 					});
 
 				console.log({ max, min, data: countries.current });
