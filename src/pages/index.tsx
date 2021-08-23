@@ -3,7 +3,7 @@ import { Country } from '../interfaces/Country';
 
 import { Nav } from '../components/template/Nav';
 import HomePage from './home/HomePage';
-import { PageContainer } from '../styles/Index';
+import { IndexContainer } from './IndexContainer';
 import { useStore } from '../hooks/useStore';
 
 interface IProps {
@@ -21,11 +21,11 @@ export default function Index({ countries, fuelData, isAppleM1 }: IProps) {
 
 	useEffect(() => console.log(fuelData), [fuelData]);
 	return (
-		<PageContainer>
+		<IndexContainer>
 			<Nav />
 
 			<HomePage countries={countries} isAppleM1 />
-		</PageContainer>
+		</IndexContainer>
 	);
 }
 
@@ -46,5 +46,6 @@ export async function getStaticProps() {
 			isAppleM1:
 				process.arch === 'arm64' && process.platform === 'darwin', // bug fix pro M1
 		},
+		revalidate: 1200,
 	};
 }

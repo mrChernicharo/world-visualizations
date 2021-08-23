@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { HeroContainer } from '../../styles/components/ui/Hero';
+import { HeroContainer } from './HeroContainer';
 // import heroImg from '/images/hero.jpg';
 
 interface IHeroProps {

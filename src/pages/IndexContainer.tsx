@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const PageContainer = styled.main`
+export const IndexContainer = styled.main`
 	h1 {
 		text-align: center;
 	}

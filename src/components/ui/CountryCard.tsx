@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Hero } from '../../components/ui/Hero';
 import { Country } from '../../interfaces/Country';
 import { FaUser } from 'react-icons/fa';
-import { CountryCardContainer } from '../../styles/pages/HomePage';
+import { CountryCardContainer } from './CountryCardContainer';
 
 interface ICountryCardProps {
 	country: Country;
@@ -13,8 +13,12 @@ interface ICountryCardProps {
 export default function CountryCard({ country, isAppleM1 }: ICountryCardProps) {
 	// React.useEffect(() => console.log(country));
 
+	function logCountry() {
+		console.log(country);
+	}
+
 	return (
-		<CountryCardContainer>
+		<CountryCardContainer onClick={logCountry}>
 			<h3>{country.name}</h3>
 			<section>
 				<Image

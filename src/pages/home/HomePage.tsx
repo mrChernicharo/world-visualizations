@@ -2,10 +2,7 @@ import * as React from 'react';
 import Image from 'next/image';
 import { Hero } from '../../components/ui/Hero';
 import { Country } from '../../interfaces/Country';
-import {
-	HomePageContainer,
-	CountriesContainer,
-} from '../../styles/pages/HomePage';
+import { HomePageContainer, CountriesContainer } from './HomePageContainer';
 import CountryCard from '../../components/ui/CountryCard';
 
 interface IHomePageProps {

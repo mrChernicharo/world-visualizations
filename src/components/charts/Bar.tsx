@@ -1,11 +1,8 @@
 import * as d3 from 'd3';
-import { selectAll, transition } from 'd3';
-import { nanoid } from 'nanoid';
-import { useRef } from 'react';
 import { useEffect } from 'react';
 import { Country } from '../../interfaces/Country';
 
-import { ChartContainer } from '../../styles/charts/Bar';
+import { ChartContainer } from './ChartContainer';
 
 interface IBarProps {
 	width: number;
